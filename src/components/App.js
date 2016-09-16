@@ -11,7 +11,6 @@ class App extends Component {
     return <div className='app'>
       <Header />
       <div className='modal welcome'>
-        <h2>Welcome to</h2>
         <h1>FREE TIME</h1>
         <p>The App that tells <span>YOU</span> what to <span>DO</span></p><br /><br />
         <div className='go' onClick={this.startApp}>FREE UP YOUR TIME</div>
