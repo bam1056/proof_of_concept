@@ -1,0 +1,62 @@
+@import 'utility'
+
+$base-text-size: 16px
+$base-font-family: sans-serif
+$modalColor: #434343
+html
+  text-size-adjust: 100%
+
+body
+  @include font-smoothing(on)
+  margin: 0
+  font: $base-text-size / 1 $base-font-family
+
+  .app
+    display: flex
+    margin: 0 auto
+    min-height: 100vh
+    width: 95vw
+    background-image: url(http://2sltd03y3vk72rzfm2erc5ue.wpengine.netdna-cdn.com/wp-content/uploads/2013/04/sxswcameron-111.jpg)
+    background-position: top
+    background-repeat: no-repeat
+    background-size: cover
+
+    .modal
+      background-color: $modalColor
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-items: center
+      padding: 50px
+      text-align: center
+      margin: 25% auto
+      border-radius: 10px
+      border: 1px solid white
+      box-shadow: 5px 5px 5px grey
+      h1
+        color: white
+        text-shadow: 3px 3px black
+        font-size: 3em
+      p
+        text-decoration: underline
+        font-weight: bold
+
+      .go
+        color: white
+        font-weight: bold
+        padding: 15px 15px 0 15px
+        height: 50px
+        width: 100px
+        background-color: lighten($modalColor, 15%)
+        border: 2px solid white
+        border-radius: 10px
+        box-shadow: 0px 3px 3px lighten($modalColor, 35%)
+        position: relative
+        top: 0
+        left: 0
+        transition: all 20ms linear
+
+        &:active
+          top: 2px
+          left: 2px
+          box-shadow: 0 0 1px lighten($modalColor, 35%)
