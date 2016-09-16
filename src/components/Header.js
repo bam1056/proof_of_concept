@@ -2,12 +2,21 @@ import React, { Component } from 'react'
 import { Dropdown, DropdownMenu, Button, NavItem, Arrow } from 'rebass'
 
 class Header extends Component {
+  constructor () {
+    super()
+    this.state = {
+      open: false
+    }
+  }
+
   showDropDown = (event) => {
-    event.target.parentNode.children[1].style.display = 'block'
+    this.setState({open: true})
   }
+
   dismissDropDown = (event) => {
-    event.target.parentNode.children[1].style.display = 'none'
+    this.setState({open: false})
   }
+
   render () {
     return <header>
       <Dropdown>
@@ -17,17 +26,23 @@ class Header extends Component {
           inverted
           rounded
           onMouseEnter={this.showDropDown}
-          onMouseLeave={this.dismissDropDown}
         >
           Menu
           <Arrow direction='down' />
         </Button>
-        <DropdownMenu onDismiss={function noRefCheck () {}} >
+        <DropdownMenu
+          open={this.state.open}
+          onDismiss={function noRefCheck () {}}
+          onMouseLeave={this.dismissDropDown}
+        >
           <NavItem is='a'>
-            Hello
+            Schedule
           </NavItem>
           <NavItem is='a'>
-            Hi
+            Events
+          </NavItem>
+          <NavItem is='a'>
+            ToDos
           </NavItem>
         </DropdownMenu>
       </Dropdown>
