@@ -32,7 +32,6 @@ class Header extends Component {
         </Button>
         <DropdownMenu
           open={this.state.open}
-          onDismiss={function noRefCheck () {}}
           onMouseLeave={this.dismissDropDown}
         >
           <NavItem is='a'>

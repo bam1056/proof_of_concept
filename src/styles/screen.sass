@@ -3,6 +3,7 @@
 $base-text-size: 16px
 $base-font-family: sans-serif
 $modalColor: #434343
+
 html
   text-size-adjust: 100%
   margin: 0
@@ -12,9 +13,11 @@ body
   margin: 0
   font: $base-text-size / 1 $base-font-family
   display: flex
+  flex-direction: column
   width: 100%
 
 .app
+  position: relative
   display: flex
   flex-direction: column
   align-items: center
@@ -29,6 +32,7 @@ body
     right: 0
     left: 0
     bottom: 0
+
     background-image: url(http://2sltd03y3vk72rzfm2erc5ue.wpengine.netdna-cdn.com/wp-content/uploads/2013/04/sxswcameron-111.jpg)
     background-position: center
     background-repeat: no-repeat
@@ -36,6 +40,7 @@ body
     z-index: 1
     transition: all 1.5s linear
     -webkit-filter: blur(3px)
+
     &.off
       -webkit-filter: blur(0)
 
@@ -43,16 +48,17 @@ body
     background-color: $modalColor
     display: flex
     flex-direction: column
-    width: 66vw
+    width: 50vw
+    height: 50vh
     border-radius: 10px
     justify-content: center
     align-items: center
     padding: 50px
     text-align: center
-    margin: 25% auto
     opacity: 0.9
-    z-index: 2
+    z-index: 1
     transition: all 0.5s linear
+    border: 5
 
     &.hidden
       opacity: 0
@@ -102,3 +108,83 @@ header
   display: flex
   align-items: center
   z-index: 2
+  .NavItem:hover
+    background-color: rgba(50, 50, 50, 0.5)
+  .NavItem:active
+    background-color: rgba(150, 50, 50, 0.5)
+
+.main
+  background-image: url(http://il5.picdn.net/shutterstock/videos/14941777/thumb/1.jpg)
+  background-repeat: no-repeat
+  background-position: center
+  filter: grayscale(50%)
+  margin: 0 auto
+  width: 90vw
+  height: 100vh
+  display: flex
+  flex-direction: column
+
+  .question
+    text-align: center
+    color: white
+
+    h2
+      font-size: 2em
+      text-shadow: 3px 3px 3px black
+
+  h1
+    padding-top: 50px
+    color: white
+    text-shadow: 3px 3px 3px black
+    text-align: center
+
+  .input-container
+    display: flex
+    flex-direction: column
+    justify-content: space-around
+    margin: 15px
+
+    .input
+      color: white
+      display: flex
+      flex-direction: column
+      align-items: center
+      margin-bottom: 15px
+      input
+        box-shadow: 2px 2px 2px black
+
+      button
+        background-color: black
+        color: white
+        margin-top: 5px
+
+
+.footer
+  background-color: black
+  color: white
+  position: absolute
+  width: 100vw
+  height: 7vh
+  bottom: 0
+  left: 0
+  right: 0
+  display: flex
+  justify-content: center
+  z-index: 1
+
+  ul
+    display: flex
+    justify-content: space-around
+    align-items: center
+    margin: 0
+    padding: 0
+
+    li
+      list-style: none
+      margin: 0 5px
+.task
+  display: flex
+  flex-direction: column
+  text-align: center
+  p
+    margin-top: 100px
