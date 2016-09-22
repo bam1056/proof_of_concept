@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import Header from './Header'
 import Footer from './Footer'
-import { Overlay, PanelHeader, Panel, Button, Input, Select, Textarea, ButtonCircle, Close } from 'rebass'
-import { Flex } from 'reflexbox'
-import Icon from 'react-geomicons'
 
 class Task extends Component {
   constructor () {
@@ -13,55 +10,19 @@ class Task extends Component {
       minutes: 0,
       hours: 0,
       days: 0,
-      total: 0,
-      overlay: false,
-      title: '',
-      description: '',
-      estimated_duration: 0,
-      user_id: 2
+      total: 0
     }
-  }
-
-  static propTypes = {
-    open: React.PropTypes.bool,
-    toggleOverlay: React.PropTypes.func
-  }
-
-  toggleOverlay = (bool) => {
-    this.setState({overlay: bool})
-  }
-
-  handleClick = () => {
-    let duration = document.querySelector("select[name='duration']")
-    console.log("SELECT", duration.value)
-    this.setState({
-      estimated_duration: duration.value
-    }, () => this.addTask())
-    this.toggleOverlay(false)
-  }
-
-  addTask = () => {
-    const { title, description, user_id, estimated_duration } = this.state
-    console.log("ADD TASK", title, description, user_id, estimated_duration)
-    window.fetch(' https://sleepy-mountain-24094.herokuapp.com/tasks', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        title: title,
-        description: description,
-        user_id: user_id,
-        estimated_duration: estimated_duration
-      })
-    })
-    .then(res => res.json())
-    .then(data => console.log(JSON.stringify(data)))
   }
 
   startTimer = () => {
     let endtime = Date.parse(new Date()) + 22500000
     console.log(endtime)
     this.getTimeRemaining(endtime)
-    setInterval(() => { this.getTimeRemaining(endtime) }, 1000)
+    this.interval = setInterval(() => { this.getTimeRemaining(endtime) }, 1000)
+  }
+
+  componentWillUnmount () {
+    clearInterval(this.interval)
   }
 
   getTimeRemaining = (endtime) => {
@@ -79,22 +40,6 @@ class Task extends Component {
     })
   }
 
-  getTitle = (event) => {
-    this.setState({
-      title: event.target.value
-    })
-  }
-
-  getDescription = (event) => {
-    this.setState({
-      description: event.target.value
-    })
-  }
-
-  closeTaskModal = () => {
-    this.toggleOverlay(false)
-  }
-
   render () {
     const { days, hours, minutes, seconds } = this.state
     return <div className='task'>
@@ -103,12 +48,7 @@ class Task extends Component {
         <h1 style={{'marginTop': '60px'}}>
         {this.props.params.currentTask}
         </h1>
-        <ButtonCircle
-          onClick={() => this.toggleOverlay(true)} title='Add'>
-          <Icon name='check' />
-        </ButtonCircle>
       </div>
-
       <h3>"SOME TASK"</h3>
       <div className='clock'>
         <div>Days: {days}</div>
@@ -116,40 +56,6 @@ class Task extends Component {
         <div>Minutes: {minutes}</div>
         <div>Seconds: {seconds}</div>
         <button onClick={this.startTimer}>Start Timer</button>
-      </div>
-      <div className='task-modal'>
-        <Overlay open={this.state.overlay} dark>
-          <Panel theme='secondary'>
-            <PanelHeader>
-              <Flex
-                align='center'
-                justify='space-between'
-                col={12}
-                >
-                TASK
-                <Close onClick={this.closeTaskModal} />
-              </Flex>
-            </PanelHeader>
-            <Input
-              placeholder='Title'
-              label='Title'
-              onChange={this.getTitle}
-              />
-            <Textarea
-              placeholder='Description'
-              label='Description'
-              onChange={this.getDescription}
-              />
-            <Select
-              label='Select'
-              message='Estimated Time for Task'
-              name='duration'
-              options={[{children: '15m', value: 0.25}, {children: '30m', value: 0.5}, {children: '45m', value: 0.75}, {children: '1h', value: 1.0}, {children: '1h 30m', value: 1.5}, {children: '2h', value: 2.0}]}
-              rounded
-            />
-            <Button onClick={this.handleClick}>ENTER TASK</Button>
-          </Panel>
-        </Overlay>
       </div>
       <Footer />
     </div>
