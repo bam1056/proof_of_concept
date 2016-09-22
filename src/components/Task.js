@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Header from './Header'
 import Footer from './Footer'
-import { Overlay, PanelHeader, Panel, Button, Input, Select, Textarea, ButtonCircle } from 'rebass'
+import { Overlay, PanelHeader, Panel, Button, Input, Select, Textarea, ButtonCircle, Close } from 'rebass'
+import { Flex } from 'reflexbox'
 import Icon from 'react-geomicons'
 
 class Task extends Component {
@@ -56,8 +57,8 @@ class Task extends Component {
     .then(data => console.log(JSON.stringify(data)))
   }
 
-  componentDidMount () {
-    let endtime = Date.parse(new Date()) + 2500000
+  startTimer = () => {
+    let endtime = Date.parse(new Date()) + 22500000
     console.log(endtime)
     this.getTimeRemaining(endtime)
     setInterval(() => { this.getTimeRemaining(endtime) }, 1000)
@@ -90,6 +91,10 @@ class Task extends Component {
     })
   }
 
+  closeTaskModal = () => {
+    this.toggleOverlay(false)
+  }
+
   render () {
     const { days, hours, minutes, seconds } = this.state
     return <div className='task'>
@@ -110,13 +115,31 @@ class Task extends Component {
         <div>Hours: {hours}</div>
         <div>Minutes: {minutes}</div>
         <div>Seconds: {seconds}</div>
+        <button onClick={this.startTimer}>Start Timer</button>
       </div>
       <div className='task-modal'>
         <Overlay open={this.state.overlay} dark>
           <Panel theme='secondary'>
-            <PanelHeader>TASK</PanelHeader>
-            <Input placeholder='Title' onChange={this.getTitle} />
-            <Textarea placeholder='Description' onChange={this.getDescription} />
+            <PanelHeader>
+              <Flex
+                align='center'
+                justify='space-between'
+                col={12}
+                >
+                TASK
+                <Close onClick={this.closeTaskModal} />
+              </Flex>
+            </PanelHeader>
+            <Input
+              placeholder='Title'
+              label='Title'
+              onChange={this.getTitle}
+              />
+            <Textarea
+              placeholder='Description'
+              label='Description'
+              onChange={this.getDescription}
+              />
             <Select
               label='Select'
               message='Estimated Time for Task'

@@ -35,15 +35,10 @@ class Header extends Component {
           open={this.state.open}
           onMouseLeave={this.dismissDropDown}
         >
-          <NavItem is='a'>
-            Schedule
-          </NavItem>
-          <NavItem>
-            <Link to='/'>Events</Link>
-          </NavItem>
-          <NavItem>
-            <Link to='/todolist'>ToDos</Link>
-          </NavItem>
+          <NavItem to='/' is={Link} children='Home' />
+          <NavItem to='/work' is={Link} children='Main' />
+          <NavItem to='/tasks' is={Link} children='Current Task' />
+          <NavItem to='/todolist' is={Link} children='ToDos' />
         </DropdownMenu>
       </Dropdown>
     </header>
