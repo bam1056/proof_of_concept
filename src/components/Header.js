@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Dropdown, DropdownMenu, Button, NavItem, Arrow } from 'rebass'
+import { Link } from 'react-router'
 
 class Header extends Component {
   constructor () {
@@ -37,11 +38,11 @@ class Header extends Component {
           <NavItem is='a'>
             Schedule
           </NavItem>
-          <NavItem is='a'>
-            Events
+          <NavItem>
+            <Link to='/'>Events</Link>
           </NavItem>
-          <NavItem is='a'>
-            ToDos
+          <NavItem>
+            <Link to='/todolist'>ToDos</Link>
           </NavItem>
         </DropdownMenu>
       </Dropdown>

@@ -32,11 +32,17 @@ module.exports = {
       include: [SOURCE_PATH],
       loader: 'babel'
     }, {
-      test: /\.(sass|scss)$/,
+      test: /\.(sass|scss|css)$/,
       loaders: ['style', 'css', 'sass']
     }, {
       test: /\.(png|jpe?g|gif|svg|ttf|eot|otf|woff|woff2)$/,
       loader: 'file'
+    }, {
+      test: /\.coffee$/,
+      loader: 'coffee-loader'
+    }, {
+      test: /\.(coffee\.md|litcoffee)$/,
+      loader: 'coffee-loader?literate'
     }]
   }
 }

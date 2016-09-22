@@ -4,12 +4,7 @@ import { Breadcrumbs } from 'rebass'
 class Footer extends Component {
   render () {
     return <div className='footer'>
-      <Breadcrumbs links={[{children: 'Add Task', href: '#!'}, {children: 'Calendar', href: '#!'}, {children: 'Do Something Else', href: '#!'}]} />
-      {/* <ul>
-        <li>Add Event |</li>
-        <li>View Calendar |</li>
-        <li>Do something</li>
-      </ul> */}
+      <Breadcrumbs links={[{children: 'Add Task', href: '/tasks'}, {children: 'Calendar', href: '/calendar'}, {children: 'Do Something Else', href: '#!'}]} />
     </div>
   }
 }

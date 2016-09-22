@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
 import Header from './Header'
 import Footer from './Footer'
+import { Link } from 'react-router'
 
 class Main extends Component {
-  static propTypes = {
-    nav: React.PropTypes.func
-  }
-
-  taskView = () => {
-    this.props.nav('task')
+  static defaultProps = {
+    currentTask: 'Task1'
   }
 
   render () {
@@ -28,7 +25,7 @@ class Main extends Component {
         <div className='input minutes'>
           <input type='text' placeholder='Time in minutes' /> <button>Minutes</button>
         </div>
-        <button onClick={this.taskView}>START WORKING</button>
+        <button><Link to={`/tasks/${this.props.currentTask}`}>START WORKING</Link></button>
       </div>
       <Footer />
     </div>
