@@ -32,16 +32,16 @@ class Task extends Component {
 
   handleClick = () => {
     let duration = document.querySelector("select[name='duration']")
+    console.log("SELECT", duration.value)
     this.setState({
       estimated_duration: duration.value
-    })
+    }, () => this.addTask())
     this.toggleOverlay(false)
-    this.addTask()
   }
 
   addTask = () => {
     const { title, description, user_id, estimated_duration } = this.state
-    console.log(title, description, user_id, estimated_duration)
+    console.log("ADD TASK", title, description, user_id, estimated_duration)
     window.fetch(' https://sleepy-mountain-24094.herokuapp.com/tasks', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Panel, PanelHeader, PanelFooter, Text, ButtonCircle } from 'rebass'
+import { Panel, PanelHeader, PanelFooter, Text, ButtonCircle, Close } from 'rebass'
 import { Flex, Box } from 'reflexbox'
 import Spinner from 'react-spinkit'
 import Header from './Header'
@@ -25,6 +25,18 @@ class Tasklist extends Component {
     }, () => console.log('Tasks', this.state.tasks))
   )
   }
+  deleteTask (id) {
+    window.fetch(`https://sleepy-mountain-24094.herokuapp.com/tasks/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    let copyOfTaskList = this.state.tasks.slice()
+    let newTaskList = copyOfTaskList.filter(task => task.id !== id)
+    this.setState({ tasks: newTaskList })
+  }
+
   render () {
     const { tasks } = this.state
     let item
@@ -42,12 +54,15 @@ class Tasklist extends Component {
               col={12}
               >
               {task.title}
-              <ButtonCircle
-                color='secondary'
-                backgroundColor='black'
-                >
-                <Icon name='compose' />
-              </ButtonCircle>
+              <Box col={3} justify='space-between'>
+                <ButtonCircle
+                  color='secondary'
+                  backgroundColor='black'
+                  >
+                  <Icon name='compose' />
+                </ButtonCircle>
+                <Close onClick={() => this.deleteTask(task.id)} />
+              </Box>
             </Flex>
           </PanelHeader>
           <Text>Task Description: {task.description}</Text>
