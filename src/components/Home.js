@@ -3,7 +3,6 @@ import { browserHistory } from 'react-router'
 import Header from './Header'
 import WelcomeModal from './WelcomeModal'
 import Footer from './Footer'
-import Spinner from 'react-spinkit'
 import '../styles/screen.sass'
 
 class Home extends Component {
@@ -39,7 +38,6 @@ class Home extends Component {
         name={this.state.userName}
         setUser={this.setUser}
         />
-      <Spinner spinnerName='circle' />
       <Footer />
     </div>
   }

@@ -27,14 +27,14 @@ class Header extends Component {
           inverted
           rounded
           onMouseEnter={this.showDropDown}
-        >
+          >
           Menu
           <Arrow direction='down' />
         </Button>
         <DropdownMenu
           open={this.state.open}
           onMouseLeave={this.dismissDropDown}
-        >
+          >
           <NavItem to='/' is={Link} children='Home' />
           <NavItem to='/work' is={Link} children='Main' />
           <NavItem to='/tasks' is={Link} children='Current Task' />

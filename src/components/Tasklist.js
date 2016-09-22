@@ -17,7 +17,7 @@ class Tasklist extends Component {
   }
 
   componentDidMount () {
-    window.fetch(' https://sleepy-mountain-24094.herokuapp.com/tasks?user_id=2', {
+    window.fetch('https://sleepy-mountain-24094.herokuapp.com/tasks?user_id=2', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     })
@@ -56,6 +56,13 @@ class Tasklist extends Component {
       overlay: true,
       mode: 'add'
     })
+  }
+
+  receiveTask = (task) => {
+    console.log('RECEIVING NEW TASK', task)
+    let copyOfTaskList = this.state.tasks.slice()
+    copyOfTaskList.push(task)
+    this.setState({ tasks: copyOfTaskList })
   }
 
   render () {
@@ -135,6 +142,7 @@ class Tasklist extends Component {
         task={this.state.currentlyEditedTask}
         overlay={this.state.overlay} toggleOverlay={this.toggleOverlay}
         mode={this.state.mode}
+        sendTask={this.receiveTask}
         />
     </div>
   }
