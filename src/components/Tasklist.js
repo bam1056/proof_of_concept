@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { Panel, PanelHeader, PanelFooter, Text } from 'rebass'
+import { Panel, PanelHeader, PanelFooter, Text, ButtonCircle } from 'rebass'
+import { Flex, Box } from 'reflexbox'
 import Spinner from 'react-spinkit'
 import Header from './Header'
 import Footer from './Footer'
+import Icon from 'react-geomicons'
 
 class Tasklist extends Component {
   constructor () {
@@ -33,7 +35,21 @@ class Tasklist extends Component {
         break
       default: item = tasks.map(task => {
         return <Panel theme='secondary' key={task.id}>
-          <PanelHeader>{task.title}</PanelHeader>
+          <PanelHeader>
+            <Flex
+              align='center'
+              justify='space-between'
+              col={12}
+              >
+              {task.title}
+              <ButtonCircle
+                color='secondary'
+                backgroundColor='black'
+                >
+                <Icon name='compose' />
+              </ButtonCircle>
+            </Flex>
+          </PanelHeader>
           <Text>Task Description: {task.description}</Text>
           <PanelFooter>Estimated Time: {task.estimated_duration}min</PanelFooter>
         </Panel>
