@@ -10,16 +10,43 @@ class Task extends Component {
       minutes: 0,
       hours: 0,
       days: 0,
-      total: 0
+      total: 0,
+      clockTime: 0
     }
   }
 
-  startTimer = () => {
+  startTimer = (e) => {
+    e.target.disabled = true
     let endtime = Date.parse(new Date()) + 22500000
-    console.log(endtime)
     this.getTimeRemaining(endtime)
     this.interval = setInterval(() => { this.getTimeRemaining(endtime) }, 1000)
+    this.setState({ clockTime: endtime })
   }
+
+  stopTimer = (e) => {
+    e.persist()
+    e.target.parentElement.childNodes[1].disabled = false
+    clearInterval(this.interval)
+  }
+
+  // pauseTimer = (e) => {
+  //   e.persist()
+  //   clearInterval(this.interval)
+  //   if (this.state.paused) {
+  //     this.setState({ paused: false }, () => {
+  //       e.target.innerHTML = 'Pause Timer'
+  //       this.interval = setInterval(() => {
+  //         this.getTimeRemaining(this.state.pauseTime)
+  //       }, 1000)
+  //     })
+  //   } else {
+  //     this.setState({ paused: true }, () => {
+  //       e.target.innerHTML = 'Unpause Timer'
+  //       let pauseTime = Date.parse(this.state.clockTime - new Date())
+  //       this.setState({ pauseTime: pauseTime })
+  //     })
+  //   }
+  // }
 
   componentWillUnmount () {
     clearInterval(this.interval)
@@ -51,11 +78,10 @@ class Task extends Component {
       </div>
       <h3>"SOME TASK"</h3>
       <div className='clock'>
-        <div>Days: {days}</div>
-        <div>Hours: {hours}</div>
-        <div>Minutes: {minutes}</div>
-        <div>Seconds: {seconds}</div>
+        <div>{hours}:{minutes}:{seconds}</div>
         <button onClick={this.startTimer}>Start Timer</button>
+        <button onClick={this.pauseTimer}>Pause Timer</button>
+        <button onClick={this.stopTimer}>Stop Timer</button>
       </div>
       <Footer />
     </div>

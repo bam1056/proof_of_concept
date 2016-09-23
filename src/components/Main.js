@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Header from './Header'
 import Footer from './Footer'
+import { Select } from 'rebass'
 import { Link } from 'react-router'
 
 class Main extends Component {
@@ -19,12 +20,14 @@ class Main extends Component {
         <h3>do you have?</h3>
       </div>
       <div className='input-container'>
-        <div className='input hours'>
-          <input type='text' placeholder='Time in hours' /> <button>Hours</button>
-        </div>
-        <div className='input minutes'>
-          <input type='text' placeholder='Time in minutes' /> <button>Minutes</button>
-        </div>
+        <Select
+          label='Free Time'
+          message=''
+          name='time free'
+          options={[{children: '15m', value: 15}, {children: '30m', value: 30}, {children: '45m', value: 45}, {children: '1h', value: 60}, {children: '1h 30m', value: 90}, {children: '2h', value: 120}]}
+          rounded
+          backgroundColor='black'
+        />
         <button><Link to={`/tasks/${this.props.currentTask}`}>START WORKING</Link></button>
       </div>
       <Footer />
