@@ -9,6 +9,10 @@ class Main extends Component {
     currentTask: 'Task1'
   }
 
+  static propTypes = {
+    currentTask: React.PropTypes.string
+  }
+
   render () {
     return <div className='main'>
       <Header />

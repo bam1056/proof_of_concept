@@ -14,6 +14,9 @@ class Task extends Component {
       clockTime: 0
     }
   }
+  static propTypes = {
+    params: React.PropTypes.object
+  }
 
   startTimer = (e) => {
     e.target.disabled = true
@@ -68,7 +71,7 @@ class Task extends Component {
   }
 
   render () {
-    const { days, hours, minutes, seconds } = this.state
+    const { hours, minutes, seconds } = this.state
     return <div className='task'>
       <Header />
       <div className='task-heading'>

@@ -39,6 +39,7 @@ class Header extends Component {
           <NavItem to='/work' is={Link} children='Main' />
           <NavItem to='/tasks' is={Link} children='Current Task' />
           <NavItem to='/todolist' is={Link} children='ToDos' />
+          <NavItem to='/profile' is={Link} children='Profile' />
         </DropdownMenu>
       </Dropdown>
     </header>
