@@ -51,7 +51,7 @@ class AddEditTaskModal extends Component {
     console.log('SELECT', duration.value)
     this.setState({
       estimated_duration: duration.value
-    }, () => this.addTask())
+    }, () => this.props.mode === 'add' ? this.addTask() : this.editTask())
     this.props.toggleOverlay(false)
   }
 
@@ -73,7 +73,18 @@ class AddEditTaskModal extends Component {
   }
 
   editTask = () => {
-    console.log('EDITING TASK')
+    const { title, description, user_id, estimated_duration } = this.state
+    console.log('EDIT TASK', title, description, user_id, estimated_duration)
+    window.fetch(`https://sleepy-mountain-24094.herokuapp.com/tasks/${this.props.task.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: title,
+        description: description,
+        user_id: user_id,
+        estimated_duration: estimated_duration
+      })
+    })
   }
 
   render () {
@@ -161,7 +172,7 @@ class AddEditTaskModal extends Component {
                 options={[{children: '15m', value: 15}, {children: '30m', value: 30}, {children: '45m', value: 45}, {children: '1h', value: 60}, {children: '1h 30m', value: 90}, {children: '2h', value: 120}]}
                 rounded
               />
-              <Button onClick={this.editTask}>
+              <Button onClick={this.handleClick}>
                 EDIT TASK
               </Button>
             </Panel>

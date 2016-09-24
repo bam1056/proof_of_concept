@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
+import { browserHistory } from 'react-router'
 
 class WelcomeModal extends Component {
   static propTypes = {
-    start: React.PropTypes.func,
-    getName: React.PropTypes.func,
-    getPass: React.PropTypes.func,
-    name: React.PropTypes.string,
     setUser: React.PropTypes.func
+  }
+
+  constructor () {
+    super()
+    this.state = {
+      userName: ''
+    }
   }
 
   handleClick = (event) => {
@@ -19,16 +23,21 @@ class WelcomeModal extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         user: {
-          name: this.props.name
+          name: this.state.userName
         }
       })
     })
     .then(res => res.json())
-    .then(data => this.props.setUser(data.id, data.name))
+    .then(data => {
+      this.props.setUser(data.id, data.name)
+      browserHistory.push('/work')
+    })
   }
 
-  getName = (event) => {
-    this.props.getName(event)
+  setName = (event) => {
+    this.setState({
+      userName: event.target.value
+    })
   }
 
   // getPassword = (event) => {
@@ -38,7 +47,7 @@ class WelcomeModal extends Component {
   render () {
     return <div className='modal welcome'>
       <h1>FREE TIME</h1>
-      <input type='text' placeholder='Username' onChange={this.getName} /><br />
+      <input type='text' placeholder='Username' value={this.state.userName} onChange={this.setName} /><br />
       {/* <input type='text' placeholder='Password' onChange={this.getPassword} /><br /> */}
       <div className='go' onClick={this.handleClick}>GetStarted</div>
     </div>

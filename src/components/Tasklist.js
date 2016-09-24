@@ -48,7 +48,8 @@ class Tasklist extends Component {
     this.setState({
       overlay: true,
       mode: 'edit',
-      currentlyEditedTask: task })
+      currentlyEditedTask: task
+    })
   }
 
   addTask = () => {
@@ -66,56 +67,48 @@ class Tasklist extends Component {
   }
 
   render () {
-    const { tasks } = this.state
+    const { tasks, currentlyEditedTask } = this.state
     let item
-    switch (this.state) {
-      case undefined: item = <Spinner
-        spinnerName='circle' />
-        break
-      case null: item = <Spinner
-        spinnerName='circle' />
-        break
-      default: item = tasks.map(task => {
-        return <Panel
-          theme='secondary'
-          key={task.id}
-          >
-          <PanelHeader>
-            <Flex
-              align='center'
+    item = tasks.map((task, i) => {
+      return <Panel
+        theme='secondary'
+        key={i}
+        >
+        <PanelHeader>
+          <Flex
+            align='center'
+            justify='space-between'
+            col={12}
+            >
+            {task.title}
+            <Box
+              col={3}
+              flex
               justify='space-between'
-              col={12}
               >
-              {task.title}
-              <Box
-                col={3}
-                flex
-                justify='space-between'
+              <ButtonCircle
+                color='secondary'
+                backgroundColor='black'
+                onClick={() => this.editTask(task)}
                 >
-                <ButtonCircle
-                  color='secondary'
-                  backgroundColor='black'
-                  onClick={() => this.editTask(task)}
-                  >
-                  <Icon name='compose' />
-                </ButtonCircle>
-                <ButtonCircle
-                  color='secondary'
-                  backgroundColor='black'
-                  onClick={() => this.deleteTask(task.id)}
-                  >
-                  <Icon name='trash' />
-                </ButtonCircle>
-              </Box>
-            </Flex>
-          </PanelHeader>
-          <Text>Task Description: {task.description}</Text>
-          <PanelFooter>
-            Estimated Time: {task.estimated_duration}min
-          </PanelFooter>
-        </Panel>
-      })
-    }
+                <Icon name='compose' />
+              </ButtonCircle>
+              <ButtonCircle
+                color='secondary'
+                backgroundColor='black'
+                onClick={() => this.deleteTask(task.id)}
+                >
+                <Icon name='trash' />
+              </ButtonCircle>
+            </Box>
+          </Flex>
+        </PanelHeader>
+        <Text>Task Description: {task.description}</Text>
+        <PanelFooter>
+          Estimated Time: {task.estimated_duration}min
+        </PanelFooter>
+      </Panel>
+    })
     return <div className='tasklist'>
       <Header />
       <Box
@@ -143,6 +136,7 @@ class Tasklist extends Component {
         overlay={this.state.overlay} toggleOverlay={this.toggleOverlay}
         mode={this.state.mode}
         sendTask={this.receiveTask}
+        key={currentlyEditedTask ? currentlyEditedTask.id : null}
         />
     </div>
   }

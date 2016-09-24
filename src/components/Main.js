@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import Header from './Header'
 import Footer from './Footer'
-import { Select } from 'rebass'
-import { Link } from 'react-router'
+import { Select, Button } from 'rebass'
+import { Box } from 'reflexbox'
+import { browserHistory, Link } from 'react-router'
 
 class Main extends Component {
   static defaultProps = {
@@ -10,7 +11,14 @@ class Main extends Component {
   }
 
   static propTypes = {
-    currentTask: React.PropTypes.string
+    currentTask: React.PropTypes.string,
+    user: React.PropTypes.object
+  }
+
+  componentWillMount () {
+    if (!this.props.user.id) {
+      browserHistory.push('/')
+    }
   }
 
   render () {
@@ -21,7 +29,7 @@ class Main extends Component {
       <div className='question'>
         <h3>How much</h3>
         <h2>FREE TIME</h2>
-        <h3>do you have?</h3>
+        <h3>do you have, {this.props.user.name}?</h3>
       </div>
       <div className='input-container'>
         <Select
@@ -32,7 +40,11 @@ class Main extends Component {
           rounded
           backgroundColor='black'
         />
-        <button><Link to={`/tasks/${this.props.currentTask}`}>START WORKING</Link></button>
+        <Box flexColumn flex col={12} align='center'>
+          <Link to={`/tasks/${this.props.currentTask}`}>
+            <Button theme='secondary' children='Tell Me What To Do' />
+          </Link>
+        </Box>
       </div>
       <Footer />
     </div>
