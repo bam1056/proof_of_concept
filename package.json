@@ -29,12 +29,16 @@
     "webpack-dev-server": "^1.15.2"
   },
   "dependencies": {
+    "belle": "^2.0.7",
     "bootstrap": "^3.3.7",
     "coffee-loader": "^0.7.2",
     "coffee-script": "^1.10.0",
     "jQuery": "^1.7.4",
+    "json-loader": "^0.5.4",
+    "moment": "^2.15.1",
     "react": "^15.3.2",
     "react-addons-update": "^15.3.2",
+    "react-big-calendar": "^0.10.3",
     "react-dom": "^15.3.1",
     "react-geomicons": "^2.1.0",
     "react-redux": "^4.4.5",
@@ -43,6 +47,6 @@
     "react-spinkit": "^1.1.11",
     "rebass": "^0.3.2",
     "redux": "^3.6.0",
-    "reflexbox": "^2.1.0"
+    "reflexbox": "^2.2.2"
   }
 }

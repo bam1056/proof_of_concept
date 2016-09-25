@@ -1,0 +1,63 @@
+{
+  "Calendar": {
+    "months": [
+      {
+        "name": "January",
+        "numDays": 31
+      },
+      {
+        "name": "February",
+        "numDays": 29
+      },
+      {
+        "name": "March",
+        "numDays": 31
+      },
+      {
+        "name": "April",
+        "numDays": 30
+      },
+      {
+        "name": "May",
+        "numDays": 31
+      },
+      {
+        "name": "June",
+        "numDays": 30
+      },
+      {
+        "name": "July",
+        "numDays": 31
+      },
+      {
+        "name": "August",
+        "numDays": 31
+      },
+      {
+        "name": "September",
+        "numDays": 30
+      },
+      {
+        "name": "October",
+        "numDays": 31
+      },
+      {
+        "name": "November",
+        "numDays": 30
+      },
+      {
+        "name": "December",
+        "numDays": 31
+      }
+    ],
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ]
+  }
+}

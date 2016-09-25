@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import Header from './Header'
 import WelcomeModal from './WelcomeModal'
-import Footer from './Footer'
 import { browserHistory } from 'react-router'
 import '../styles/screen.sass'
 
@@ -11,7 +9,8 @@ class Home extends Component {
   }
 
   componentWillMount () {
-    if (window.sessionStorage.userId) {
+    if (window.sessionStorage.getItem('userId')) {
+      this.props.setUser(window.sessionStorage.getItem('userId'), window.sessionStorage.getItem('userName'))
       browserHistory.push('/work')
     }
   }
@@ -19,9 +18,7 @@ class Home extends Component {
   render () {
     return <div className='app'>
       <div className='blur' />
-      <Header />
       <WelcomeModal setUser={this.props.setUser} />
-      <Footer />
     </div>
   }
 }

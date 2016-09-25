@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import Header from './Header'
-import Footer from './Footer'
 
 class Task extends Component {
   constructor () {
@@ -73,7 +71,6 @@ class Task extends Component {
   render () {
     const { hours, minutes, seconds } = this.state
     return <div className='task'>
-      <Header />
       <div className='task-heading'>
         <h1 style={{'marginTop': '60px'}}>
         {this.props.params.currentTask}
@@ -86,7 +83,6 @@ class Task extends Component {
         <button onClick={this.pauseTimer}>Pause Timer</button>
         <button onClick={this.stopTimer}>Stop Timer</button>
       </div>
-      <Footer />
     </div>
   }
 }

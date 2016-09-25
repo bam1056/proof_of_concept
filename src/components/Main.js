@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import Header from './Header'
-import Footer from './Footer'
 import { Select, Button } from 'rebass'
 import { Box } from 'reflexbox'
 import { browserHistory, Link } from 'react-router'
@@ -23,7 +21,6 @@ class Main extends Component {
 
   render () {
     return <div className='main'>
-      <Header />
       <h1>Ready to Work?</h1>
       <br />
       <div className='question'>
@@ -46,7 +43,6 @@ class Main extends Component {
           </Link>
         </Box>
       </div>
-      <Footer />
     </div>
   }
 }

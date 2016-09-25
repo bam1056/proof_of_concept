@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { Panel, PanelHeader, PanelFooter, Text, ButtonCircle } from 'rebass'
 import { Flex, Box } from 'reflexbox'
-import Spinner from 'react-spinkit'
-import Header from './Header'
-import Footer from './Footer'
 import Icon from 'react-geomicons'
 import AddEditTaskModal from './AddEditTaskModal'
 
 class Tasklist extends Component {
+  static propTypes = {
+    user: React.PropTypes.object
+  }
+
   constructor () {
     super()
     this.state = {
@@ -17,7 +18,7 @@ class Tasklist extends Component {
   }
 
   componentDidMount () {
-    window.fetch('https://sleepy-mountain-24094.herokuapp.com/tasks?user_id=2', {
+    window.fetch(`https://sleepy-mountain-24094.herokuapp.com/tasks?user_id=${this.props.user.id}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     })
@@ -46,10 +47,9 @@ class Tasklist extends Component {
 
   editTask = (task) => {
     this.setState({
-      overlay: true,
       mode: 'edit',
       currentlyEditedTask: task
-    })
+    }, () => this.toggleOverlay(true))
   }
 
   addTask = () => {
@@ -110,7 +110,6 @@ class Tasklist extends Component {
       </Panel>
     })
     return <div className='tasklist'>
-      <Header />
       <Box
         flex
         align='center'
@@ -130,8 +129,8 @@ class Tasklist extends Component {
       <div className='task-panels'>
         {item}
       </div>
-      <Footer />
       <AddEditTaskModal
+        user={this.props.user}
         task={this.state.currentlyEditedTask}
         overlay={this.state.overlay} toggleOverlay={this.toggleOverlay}
         mode={this.state.mode}

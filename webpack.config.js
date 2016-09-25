@@ -43,6 +43,9 @@ module.exports = {
     }, {
       test: /\.(coffee\.md|litcoffee)$/,
       loader: 'coffee-loader?literate'
+    }, {
+      test: /\.json$/,
+      loader: 'json'
     }]
   }
 }

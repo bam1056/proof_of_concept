@@ -14,11 +14,12 @@ import {
 class AddEditTaskModal extends Component {
   constructor () {
     super()
+    console.log('buildingModal')
     this.state = {
       title: '',
       description: '',
       estimated_duration: 0,
-      user_id: 2
+      user_id: window.sessionStorage.getItem('userId')
     }
   }
 
@@ -27,7 +28,8 @@ class AddEditTaskModal extends Component {
     mode: React.PropTypes.string,
     task: React.PropTypes.object,
     overlay: React.PropTypes.bool,
-    sendTask: React.PropTypes.func
+    sendTask: React.PropTypes.func,
+    user: React.PropTypes.object
   }
 
   getTitle = (event) => {
@@ -64,7 +66,7 @@ class AddEditTaskModal extends Component {
       body: JSON.stringify({
         title: title,
         description: description,
-        user_id: user_id,
+        user_id: this.props.user.id,
         estimated_duration: estimated_duration
       })
     })
@@ -81,10 +83,12 @@ class AddEditTaskModal extends Component {
       body: JSON.stringify({
         title: title,
         description: description,
-        user_id: user_id,
+        user_id: this.props.user.id,
         estimated_duration: estimated_duration
       })
     })
+    .then(res => res.json())
+    .then(data => this.props.sendTask(data))
   }
 
   render () {
@@ -157,12 +161,14 @@ class AddEditTaskModal extends Component {
                 placeholder={this.props.task.title}
                 label='Title'
                 name='Title'
+                value={this.state.title}
                 onChange={this.getTitle}
                 />
               <Textarea
                 placeholder={this.props.task.description}
                 label='Description'
                 name='Description'
+                value={this.state.description}
                 onChange={this.getDescription}
                 />
               <Select

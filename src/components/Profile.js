@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import Header from './Header'
-import Footer from './Footer'
 import { Card, CardImage, Heading, Text, Panel } from 'rebass'
 import { Box } from 'reflexbox'
 
@@ -10,7 +8,6 @@ class Profile extends Component {
   }
   render () {
     return <div className='profile'>
-      <Header />
       <Box mt={6} flex flexColumn align='center' justify='center'>
         <Card rounded width={300}>
           <CardImage src='https://upload.wikimedia.org/wikipedia/commons/0/07/Avatar_girl_face.png' style={{maxWidth: 300}} />
@@ -34,7 +31,6 @@ class Profile extends Component {
           </Panel>
         </Card>
       </Box>
-      <Footer />
     </div>
   }
 }

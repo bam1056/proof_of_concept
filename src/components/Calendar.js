@@ -1,13 +1,21 @@
 import React, { Component } from 'react'
-import Header from './Header'
-import Footer from './Footer'
+import cal from './calData.json'
+import { Box } from 'reflexbox'
 
 class Calendar extends Component {
+  getEvents = (event) => {
+    console.log(event.target)
+  }
   render () {
+    let months = cal.Calendar.months
+    let monthCal = months.map((month, i) => {
+      return <Box align='center' justify='center'>
+        <p>{month.name} : {month.numDays}</p>
+      </Box>
+    })
     return <div className='calendar'>
-      <Header />
-      <div className='calBG' />
-      <Footer />
+      {monthCal}
+      {/* <div className='calBG' /> */}
     </div>
   }
 }

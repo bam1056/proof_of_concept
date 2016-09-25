@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Dropdown, DropdownMenu, Button, NavItem, Arrow } from 'rebass'
-import { Link } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 
 class Header extends Component {
   constructor () {
@@ -9,6 +9,9 @@ class Header extends Component {
       open: false
     }
   }
+  static propTypes = {
+    setUser: React.PropTypes.func
+  }
 
   showDropDown = (event) => {
     this.setState({open: true})
@@ -16,6 +19,12 @@ class Header extends Component {
 
   dismissDropDown = (event) => {
     this.setState({open: false})
+  }
+
+  signOut = () => {
+    window.sessionStorage.removeItem('userId')
+    window.sessionStorage.removeItem('userName')
+    browserHistory.push('/')
   }
 
   render () {
@@ -42,6 +51,7 @@ class Header extends Component {
           <NavItem to='/profile' is={Link} children='Profile' />
         </DropdownMenu>
       </Dropdown>
+      <span onClick={this.signOut}>Sign Out</span>
     </header>
   }
 }
